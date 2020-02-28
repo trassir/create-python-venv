@@ -12,9 +12,9 @@ async function run() {
   await io.mkdirP(path);
   if (is_linux()) {
     await exec.exec("sudo", ['apt-get', 'install', 'python3-venv']);
-    await exec.exec('python3', ['-m', 'venv', quote(path)]);
+    await exec.exec('python', ['-m', 'venv', quote(path)]);
   } else if(is_windows()) {
-    await exec.exec('python3', ['-m', 'venv', quote(path)]);
+    await exec.exec('python', ['-m', 'venv', quote(path)]);
   } else {
     await exec.exec('pyenv', [quote(path)]);
   }
