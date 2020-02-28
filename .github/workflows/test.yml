@@ -1,0 +1,26 @@
+on: [pull_request]
+
+jobs:
+  test_create_python3_venv:
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
+        include:
+          - os: ubuntu-latest
+            source_cmd: 'source venv/bin/activate'
+          - os: macos-latest
+            source_cmd: 'source venv/bin/activate'
+          - os: windows-latest
+            source_cmd: 'venv/bin/activate.bat'
+    name: Create and source venv
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create venv
+        uses: ./
+        with:
+          path: 'myvenv'
+      - name: Source venv
+        run: ${{ matrix.source_cmd }}
+        shell: bash
