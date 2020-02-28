@@ -15,7 +15,7 @@ async function run() {
   } else if(is_windows()) {
     await exec.exec('python', ['-m', 'venv', path]);
   } else {
-    await exec.exec('pyenv', [path]);
+    await exec.exec('pyvenv', [path]);
   }
 }
 
